@@ -1,4 +1,3 @@
-
 function getDocument(address, source, post, destName) {
 	if (destName===undefined)
 		destName='#content'
@@ -120,7 +119,6 @@ function gameStart() {
     else{
         var check = 1
     }
-
     if (check == 1) {
         word = word.toUpperCase()
         getDocument('hanggame.html', 'hanggame.html').then(() => (gameSet(word)))
@@ -179,7 +177,8 @@ function checkChar() {
     }
     document.querySelector("#char").value = ""
     document.querySelector("#guess-list").innerHTML = guess_string
-
 }
+
+// CHESS -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
