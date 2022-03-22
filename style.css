@@ -1,0 +1,195 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+
+table {
+    border: solid rgb(82, 82, 82) 5px;
+}
+
+td {
+    border: solid rgb(82, 82, 82) 5px;
+    width: 200px;
+    height: 200px;
+}
+
+#restart-ttt {
+    border: solid rgb(82, 82, 82) 2px;
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+}
+
+#restart-ttt:hover {
+    background-color: rgb(82, 82, 82);
+    color:white;
+}
+
+#info {
+    margin-left: 10px;
+    border: solid rgb(82, 82, 82) 2px;
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+    width: 332px;
+    height: 40px;
+    text-align: center;
+}
+
+#container {
+    padding-top: 20px;
+    display: flex;
+}
+
+#main {
+    height: 100%;
+}
+
+#board-ttt {
+    text-align: center;
+    align-items: center;
+    padding-left: 30%;
+    padding-top: 5%;
+    width: 100%;
+}
+
+#nav {
+    padding: 20px;
+    width: 100%;
+    background-color: rgb(24, 23, 23);
+    color: white;
+    height: 50px;
+}
+
+a{
+    padding-top: 10px;
+    font-size: 20px;
+    margin: 20px;
+}
+
+a:any-link {
+    text-decoration: none;
+    color: white;
+}
+
+
+#nav h3 {
+    font-size: 30px;
+}
+
+#board-hg-start {
+    padding-top: 10%;
+    padding-left: 35%;
+}
+
+#word {
+    width: 500px;
+    font-size: 20px;
+    height: 30px;
+    margin: 20px;
+    padding: 5px;
+    border: none;
+    background-color:lightgrey;
+}
+
+#start-hg {
+    border: solid rgb(82, 82, 82) 2px;
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    margin: 20px;
+    margin-left: 120px;
+    border: none;
+}
+
+#start-hg:hover {
+    background-color: rgb(82, 82, 82);
+    color:white;
+}
+
+#img-hg {
+    margin: 100px;
+    width: 700px;
+    height: 700px;
+    border: solid rgb(82, 82, 82) 5px;
+}
+
+#board-hg-game {
+    display: flex;
+    width: 100%;
+}
+
+#left-hg {
+    padding-top: 10%;
+    padding-left: 10%;
+    width: 50%;
+}
+
+#right-hg {
+    width: 50%;
+}
+
+#charOfWord {
+    display: flex;
+    margin-left: 20px;
+}
+
+#charOfWord div{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-bottom: solid rgb(82, 82, 82) 5px; 
+    font-size: 30px;
+    margin-left:5px;
+}
+
+#char {
+    width: 500px;
+    font-size: 20px;
+    height: 34px;
+    margin: 20px;
+    padding: 5px;
+    border: none;
+    background-color:lightgrey;
+}
+
+#send-char {
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    margin: 20px;
+    border: solid rgb(82, 82, 82) 2px;
+}
+
+#send-char:hover {
+    background-color: rgb(82, 82, 82);
+    color:white;
+}
+
+#container-hg {
+    display: flex;
+    padding-top: 20px;
+}
+
+#info-hgame, #info-hg, .guess {
+    margin-left: 20px;
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+}
+
+.restart-hg {
+    margin: 20px;
+}
+
+#info-hgame {
+    margin-bottom: 10px;
+}
+

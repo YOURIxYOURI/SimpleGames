@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <title>SimpleGames</title>
+</head>
+<body>
+    <div id="main">
+        <div id="nav">
+            <h3>SimpleGames</h3>
+            <a href="index.html" class="button">Tick Tack Toe</a>
+            <a href="hangman.html" class="button">HangMan</a>
+            <a href="chess.html" class="button">Chess</a>
+        </div>
+        <div id="board-ttt">
+            <table>
+                <tr><td id="1" data-badge="1"></td><td id="2" data-badge="2"></td><td id="3" data-badge="3"></td></tr>
+                <tr><td id="4" data-badge="4"></td><td id="5" data-badge="5"></td><td id="6" data-badge="6"></td></tr>
+                <tr><td id="7" data-badge="7"></td><td id="8" data-badge="8"></td><td id="9" data-badge="9"></td></tr>
+            </table>
+            <div id="container">
+                <div><p id="restart-ttt" data-href="index.html">RESTART</p></div>
+                <div><p id="info"></p></div>
+            <div>
+        </div>
+    </div>
+    <script>
+        move(0)
+        addEvents()
+    </script>
+</body>
+</html>
