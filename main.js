@@ -181,5 +181,69 @@ function checkChar() {
 
 // CHESS -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+function chess_gameSet() {
+    document.querySelectorAll("td").forEach( v => {
+        let img = document.createElement('img');
+        if(v.dataset.y ==  '2') {
+            img.src = "./img/footmanw.png"
+            img.class = "footmanw"
+            v.appendChild(img)
+        }
+        if(v.dataset.y ==  '7') {
+            img.src = "./img/footmanb.png"
+            img.class = "footmanb"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '1' && v.dataset.x == "1") || (v.dataset.y ==  '1' && v.dataset.x == "8")) {
+            img.src = "./img/towerw.png"
+            img.class = "towerw"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '8' && v.dataset.x == "1") || (v.dataset.y ==  '8' && v.dataset.x == "8")) {
+            img.src = "./img/towerb.png"
+            img.class = "towerb"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '8' && v.dataset.x == "2") || (v.dataset.y ==  '8' && v.dataset.x == "7")) {
+            img.src = "./img/horseb.png"
+            img.class = "horseb"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '1' && v.dataset.x == "2") || (v.dataset.y ==  '1' && v.dataset.x == "7")) {
+            img.src = "./img/horsew.png"
+            img.class = "horsew"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '1' && v.dataset.x == "3") || (v.dataset.y ==  '1' && v.dataset.x == "6")) {
+            img.src = "./img/bishopw.png"
+            img.class = "bishopw"
+            v.appendChild(img)
+        }
+        if((v.dataset.y ==  '8' && v.dataset.x == "3") || (v.dataset.y ==  '8' && v.dataset.x == "6")) {
+            img.src = "./img/bishopb.png"
+            img.class = "bishopb"
+            v.appendChild(img)
+        }
+        if(v.dataset.y ==  '8' && v.dataset.x == "4") {
+            img.src = "./img/queenb.png"
+            img.class = "queenb"
+            v.appendChild(img)
+        }
+        if(v.dataset.y ==  '1' && v.dataset.x == "4") {
+            img.src = "./img/queenw.png"
+            img.class = "queenw"
+            v.appendChild(img)
+        }
+        if(v.dataset.y ==  '1' && v.dataset.x == "5") {
+            img.src = "./img/kingw.png"
+            img.class = "kingw"
+            v.appendChild(img)
+        }
+        if(v.dataset.y ==  '8' && v.dataset.x == "5") {
+            img.src = "./img/kingb.png"
+            img.class = "kingb"
+            v.appendChild(img)
+        }
+    })
+}
 

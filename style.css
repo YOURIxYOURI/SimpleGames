@@ -207,11 +207,13 @@ a:any-link {
     border: solid black 3px;
     width: 95px;
     height: 95px;
+    row-gap: 0px;
+    column-gap: 0px;
 }
 
 #chess .black{
-    background-color: black;
-    border: none;
+    background-color: rgb(61, 61, 61);
+    border: solid black 3px;
 }
 
 thead {
