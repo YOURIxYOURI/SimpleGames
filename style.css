@@ -227,3 +227,6 @@ thead {
     font-size: 20px;
 }
 
+#choosed {
+    opacity: 0.5;
+}
