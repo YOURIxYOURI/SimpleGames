@@ -5,12 +5,12 @@
     overflow: hidden;
 }
 
-
-table {
+/* TICK TACK TOE */
+#ttt {
     border: solid rgb(82, 82, 82) 5px;
 }
 
-td {
+#ttt td {
     border: solid rgb(82, 82, 82) 5px;
     width: 200px;
     height: 200px;
@@ -80,6 +80,7 @@ a:any-link {
 #nav h3 {
     font-size: 30px;
 }
+/* HANGMAN */
 
 #board-hg-start {
     padding-top: 10%;
@@ -191,5 +192,36 @@ a:any-link {
 
 #info-hgame {
     margin-bottom: 10px;
+}
+
+/* CHESS */
+
+#chess {
+    margin-left:20%;
+    margin-top: 2px;
+    row-gap: 0px;
+    column-gap: 0px;
+}
+
+#chess td {
+    border: solid black 3px;
+    width: 95px;
+    height: 95px;
+}
+
+#chess .black{
+    background-color: black;
+    border: none;
+}
+
+thead {
+    border: none
+}
+
+#chess .numbers {
+    border: none;
+    text-align: right;
+    padding-right: 5px ;
+    font-size: 20px;
 }
 
