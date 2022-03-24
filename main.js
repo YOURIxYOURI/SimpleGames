@@ -184,87 +184,98 @@ function checkChar() {
 function chess_gameSet() {
     document.querySelectorAll("td").forEach( v => {
         var img = document.createElement('img');
-        img.className = "figure"
         if(v.dataset.y ==  '2') {
             img.src = "./img/footmanw.png"
-            img.className = "footmanw figure"
+            img.className = "footman figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if(v.dataset.y ==  '7') {
             img.src = "./img/footmanb.png"
-            img.className = "footmanb figure"
+            img.className = "footman figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '1' && v.dataset.x == "1") || (v.dataset.y ==  '1' && v.dataset.x == "8")) {
             img.src = "./img/towerw.png"
-            img.className = "towerw figure"
+            img.className = "tower figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '8' && v.dataset.x == "1") || (v.dataset.y ==  '8' && v.dataset.x == "8")) {
             img.src = "./img/towerb.png"
-            img.className = "towerb figure"
+            img.className = "tower figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '8' && v.dataset.x == "2") || (v.dataset.y ==  '8' && v.dataset.x == "7")) {
             img.src = "./img/horseb.png"
-            img.className = "horseb figure"
+            img.className = "horse figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '1' && v.dataset.x == "2") || (v.dataset.y ==  '1' && v.dataset.x == "7")) {
             img.src = "./img/horsew.png"
-            img.className = "horsew figure"
+            img.className = "horse figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '1' && v.dataset.x == "3") || (v.dataset.y ==  '1' && v.dataset.x == "6")) {
             img.src = "./img/bishopw.png"
-            img.className = "bishopw figure"
+            img.className = "bishop figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if((v.dataset.y ==  '8' && v.dataset.x == "3") || (v.dataset.y ==  '8' && v.dataset.x == "6")) {
             img.src = "./img/bishopb.png"
-            img.className = "bishopb figure"
+            img.className = "bishop figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if(v.dataset.y ==  '8' && v.dataset.x == "4") {
             img.src = "./img/queenb.png"
-            img.className = "queenb figure"
+            img.className = "queen figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if(v.dataset.y ==  '1' && v.dataset.x == "4") {
             img.src = "./img/queenw.png"
-            img.className = "queenw figure"
+            img.className = "queen figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if(v.dataset.y ==  '1' && v.dataset.x == "5") {
             img.src = "./img/kingw.png"
-            img.className = "kingw figure"
+            img.className = "king figure"
+            img.dataset.color = "white"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
         }
         if(v.dataset.y ==  '8' && v.dataset.x == "5") {
             img.src = "./img/kingb.png"
-            img.className = "kingb figure"
+            img.className = "king figure"
+            img.dataset.color = "black"
             img.dataset.x = v.dataset.x
             img.dataset.y = v.dataset.y
             v.appendChild(img)
@@ -272,7 +283,7 @@ function chess_gameSet() {
     })
     chess_move()
 }
-
+var checked_figure
 var checked = 0
 function chess_move() {
     document.querySelectorAll(".figure").forEach( v => {
@@ -287,24 +298,145 @@ function chess_move() {
                 }
             }else{
                 checked = 1
-                var checked_figure = v
+                checked_figure = v
                 checked_figure.setAttribute('id', 'choosed')
                 e.stopPropagation()
-                console.log(checked_figure)
+                // console.log(checked_figure)
                 document.querySelectorAll("td").forEach( v2 => {
                     v2.onclick = (e) => {
+                        var child = v2.firstChild
                         console.log("test")
-                        if(checked == 1) {
-                            checked_figure.dataset.x = v2.dataset.x
-                            checked_figure.dataset.y = v2.dataset.y
-                            v2.appendChild(checked_figure)
+                        console.log(child)
+                        if(check_move(checked_figure, v2.dataset.x, v2.dataset.y, child)) {
+                            if(checked == 1) {
+                                if(child != null) {
+                                    console.log('figura')
+                                    if (child.dataset.color != checked_figure.dataset.color) {
+                                        console.log('bicie')
+                                        child.remove()
+                                        v2.appendChild(checked_figure)
+                                        checked_figure.dataset.x = v2.dataset.x
+                                        checked_figure.dataset.y = v2.dataset.y
+                                        checked = 0 
+                                        checked_figure.setAttribute('id', '')
+                                        checked_figure = ""
+                                    }else if (child.dataset.color == checked_figure.dataset.color) {
+                                        console.log('sojusznik')
+                                        checked = 0 
+                                        checked_figure.setAttribute('id', '')
+                                        checked_figure = ""
+                                    }
+                                }else {
+                                    checked_figure.dataset.x = v2.dataset.x
+                                    checked_figure.dataset.y = v2.dataset.y
+                                    v2.appendChild(checked_figure)
+                                    checked = 0 
+                                    checked_figure.setAttribute('id', '')
+                                    checked_figure = ""
+                                }
+                            }
+                        }
+                        else {
+                            console.log('zle pole')
                             checked = 0 
                             checked_figure.setAttribute('id', '')
-                        }
+                            checked_figure = ""
+                        }    
                     }
                 })
             } 
         }
     })
+}
+var bishop_move_x
+var bishop_move_y
+function check_move(figure, vectorX, vectorY, field_child) {
+    if(figure.className == "footman figure") {
+        if(figure.dataset.color == "black") {
+            if(field_child == null) {
+                if(figure.dataset.y != "7") {
+                    if((parseInt(figure.dataset.y - vectorY)) == 1) {
+                        return true
+                    }
+                }else{
+                    if(((parseInt(figure.dataset.y) - parseInt(vectorY)) == 2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 1)) {
+                        return true
+                    }
+                }
+            }else if(field_child.dataset.color == "white") {
+                if(figure.dataset.y != "7") {
+                    if((parseInt(figure.dataset.y - vectorY)) == 1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
+                        return true
+                    }
+                }
+            }
+        }
+        if(figure.dataset.color == "white") {
+            if(field_child == null) {
+                if(figure.dataset.y != "2") {
+                    if((parseInt(figure.dataset.y - vectorY)) == -1) {
+                        return true
+                    }
+                }else{
+                    if(((parseInt(figure.dataset.y) - parseInt(vectorY)) == -2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == -1)) {
+                        return true
+                    }
+                }
+            }else if(field_child.dataset.color == "black") {
+                if(figure.dataset.y != "2") {
+                    if((parseInt(figure.dataset.y - vectorY)) == -1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+    if(figure.className == "tower figure" || figure.className == "queen figure") {
+        if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
+            return true
+        }
+        else if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
+            return true
+        }
+        return false
+    }
+    if(figure.className == "horse figure") {
+        if((((parseInt(figure.dataset.y) - parseInt(vectorY)) == -2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 2)) && (((parseInt(figure.dataset.x) - parseInt(vectorX)) == 1) || ((parseInt(figure.dataset.x) - parseInt(vectorX)) == -1))) {
+            return true
+        }
+        if((((parseInt(figure.dataset.y) - parseInt(vectorY)) == -1) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 1)) && (((parseInt(figure.dataset.x) - parseInt(vectorX)) == 2) || ((parseInt(figure.dataset.x) - parseInt(vectorX)) == -2))) {
+            return true
+        }
+        return false
+    }
+    if(figure.className == "bishop figure" || figure.className == "queen figure") {
+        var check_x = checked_figure.dataset.x
+        var check_y = checked_figure.dataset.y
+        if(figure.dataset.y < vectorY) {
+            bishop_move_y = "++"
+        }
+        else {
+            bishop_move_y = "--"
+        }
+        if(figure.dataset.x < vectorX) {
+            bishop_move_x = "++"
+        }
+        else {
+            bishop_move_x = "--"
+        }
+        // do{
+
+        // }while()
+        return false
+    }
+    if(figure.className == "king figure") {
+        if((parseInt(figure.dataset.y - vectorY)) == 1 || (parseInt(figure.dataset.y - vectorY) == -1)) {
+            return true
+        }else if((parseInt(figure.dataset.x - vectorX)) == 1 || ((parseInt(figure.dataset.x - vectorX)) == -1)) {
+            return true
+        }
+        return false
+    }
 }
 
