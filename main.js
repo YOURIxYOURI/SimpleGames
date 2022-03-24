@@ -392,7 +392,7 @@ function check_move(figure, vectorX, vectorY, field_child) {
         }
         return false
     }
-    if(figure.className == "tower figure" || figure.className == "queen figure") {
+    if(figure.className == "tower figure") {
         if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
             return true
         }
@@ -410,24 +410,45 @@ function check_move(figure, vectorX, vectorY, field_child) {
         }
         return false
     }
-    if(figure.className == "bishop figure" || figure.className == "queen figure") {
+    if(figure.className == "bishop figure") {
         var check_x = checked_figure.dataset.x
         var check_y = checked_figure.dataset.y
         if(figure.dataset.y < vectorY) {
             bishop_move_y = "++"
+            console.log("gora")
         }
         else {
             bishop_move_y = "--"
+            console.log("dol")
         }
         if(figure.dataset.x < vectorX) {
             bishop_move_x = "++"
+            console.log("prawo")
         }
         else {
             bishop_move_x = "--"
+            console.log("lewo")
         }
-        // do{
-
-        // }while()
+        do{
+            if(bishop_move_x == "++") {
+                check_x++
+                console.log({check_x})
+            }else{
+                check_x--
+                console.log({check_x})
+            }
+            if(bishop_move_y == "++") {
+                check_y++
+                console.log({check_y})
+            }else{
+                check_y--
+                console.log({check_y})
+            }
+        }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
+        console.log(check_y, check_x, vectorY, vectorX)
+        if((check_x == vectorX) && (check_y == vectorY)) {
+            return true
+        }
         return false
     }
     if(figure.className == "king figure") {
@@ -437,6 +458,54 @@ function check_move(figure, vectorX, vectorY, field_child) {
             return true
         }
         return false
+    }
+    if(figure.className == "queen figure") {
+        if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
+            return true
+        }
+        else if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
+            return true
+        }
+        var check_x = checked_figure.dataset.x
+        var check_y = checked_figure.dataset.y
+        if(figure.dataset.y < vectorY) {
+            bishop_move_y = "++"
+            console.log("gora")
+        }
+        else {
+            bishop_move_y = "--"
+            console.log("dol")
+        }
+        if(figure.dataset.x < vectorX) {
+            bishop_move_x = "++"
+            console.log("prawo")
+        }
+        else {
+            bishop_move_x = "--"
+            console.log("lewo")
+        }
+        do{
+            if(bishop_move_x == "++") {
+                check_x++
+                console.log({check_x})
+            }else{
+                check_x--
+                console.log({check_x})
+            }
+            if(bishop_move_y == "++") {
+                check_y++
+                console.log({check_y})
+            }else{
+                check_y--
+                console.log({check_y})
+            }
+        }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
+        console.log(check_y, check_x, vectorY, vectorX)
+        if((check_x == vectorX) && (check_y == vectorY)) {
+            return true
+        }
+        return false
+
     }
 }
 
