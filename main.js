@@ -319,6 +319,8 @@ function chess_move() {
                                 if(child != null) {
                                     console.log('figura')
                                     if (child.dataset.color != checked_figure.dataset.color) {
+                                        var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-fall-1-sound-effect-85931397.mp3');
+                                        audio.play();
                                         console.log('bicie')
                                         child.remove()
                                         v2.appendChild(checked_figure)
@@ -340,6 +342,9 @@ function chess_move() {
                                         checked_figure = ""
                                     }
                                 }else {
+                                    var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-slide-1-sound-effect-99743653.mp3');
+                                    audio.play();
+
                                     checked_figure.dataset.x = v2.dataset.x
                                     checked_figure.dataset.y = v2.dataset.y
                                     v2.appendChild(checked_figure)
@@ -505,6 +510,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                 }
                 console.log("control"+control)
                 if(control == 1) {
+                    var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-slide-1-sound-effect-99743653.mp3');
                     var child_for_king = field_child
                     console.log(child_for_king)
                     if(child_for_king == null) {
@@ -528,6 +534,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                                     console.log(id_for_king, id_for_tower)
                                     document.querySelector(id_for_tower).appendChild(figure)
                                     document.querySelector(id_for_king).appendChild(child_for_king)
+                                    audio.play();
                                     checked = 0
                                     white_king_move == 1
                                     if(now_play == "white") {
@@ -539,6 +546,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                                     return false
                                 }else{
                                     console.log("king make move")
+                                    return false
                                 }
                             }else{
                                 if(black_king_move == 0){
@@ -553,6 +561,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                                     console.log(id_for_king, id_for_tower)
                                     document.querySelector(id_for_tower).appendChild(figure)
                                     document.querySelector(id_for_king).appendChild(child_for_king)
+                                    audio.play();
                                     checked = 0
                                     black_king_move == 1
                                     if(now_play == "white") {
@@ -564,11 +573,14 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                                     return false
                                 }else{
                                     console.log("king make move")
+                                    return false
                                 }
                             }
                         }else{
                             return true
                         }
+                    }else{
+                        return true
                     }
                 }else{
                     return false
