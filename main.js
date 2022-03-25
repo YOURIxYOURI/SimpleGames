@@ -371,72 +371,103 @@ function chess_move() {
 const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 var bishop_move_x
 var bishop_move_y
+var white_king_move = 0
+var black_king_move = 0
 var control = 0
 function check_move(figure, vectorX, vectorY, field_child, who) {
     if(figure.dataset.color == who) {
         if(figure.className == "footman figure") {
             if(figure.dataset.color == "black") {
                 if(field_child == null) {
+                    console.log("puste foot")
                     if(figure.dataset.y != "7") {
-                        if((parseInt(figure.dataset.y - vectorY)) == 1) {
-                            return control = 1
+                        if(((parseInt(figure.dataset.y - vectorY)) == 1) && (parseInt(figure.dataset.x) == parseInt(vectorX))) {
+                            return true
                         }
                     }else{
-                        if(((parseInt(figure.dataset.y) - parseInt(vectorY)) == 2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 1)) {
-                            return control = 1
+                        if((((parseInt(figure.dataset.y) - parseInt(vectorY)) == 2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 1))  && (parseInt(figure.dataset.x) == parseInt(vectorX))) {
+                            if(parseInt(figure.dataset.y) - parseInt(vectorY) == 2) {
+                                var check_y = figure.dataset.y
+                                var check_x = figure.dataset.x
+                                var id = '#' + letters[check_x - 1] +""+(parseInt(check_y) - 1)
+                                console.log(id)
+                                var check_field = document.querySelector(id).firstChild
+                                if(check_field != null) {
+                                    return false
+                                }
+                            }
+                            return true
                         }
                     }
                 }else if(field_child.dataset.color == "white") {
-                    if(figure.dataset.y != "7") {
-                        if((parseInt(figure.dataset.y - vectorY)) == 1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
-                            return control = 1
-                        }
+                    console.log("wrog foot")
+                    if((parseInt(figure.dataset.y - vectorY)) == 1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
+                        return true
                     }
                 }
             }
             if(figure.dataset.color == "white") {
                 if(field_child == null) {
+                    console.log("puste foot")
                     if(figure.dataset.y != "2") {
-                        if((parseInt(figure.dataset.y - vectorY)) == -1) {
-                            return control = 1
+                        if(((parseInt(figure.dataset.y - vectorY)) == -1) && (parseInt(figure.dataset.x) == parseInt(vectorX))) {
+                            return true
                         }
                     }else{
-                        if(((parseInt(figure.dataset.y) - parseInt(vectorY)) == -2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == -1)) {
-                            return control = 1
+                        if((((parseInt(figure.dataset.y) - parseInt(vectorY)) == -2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == -1))  && (parseInt(figure.dataset.x) == parseInt(vectorX))) {
+                            if(parseInt(figure.dataset.y) - parseInt(vectorY) == -2) {
+                                var check_y = figure.dataset.y
+                                var check_x = figure.dataset.x
+                                var id = '#' + letters[check_x - 1] +""+(parseInt(check_y) + 1)
+                                console.log(id)
+                                var check_field = document.querySelector(id).firstChild
+                                if(check_field != null) {
+                                    return false
+                                }
+                            }
+                            return true
                         }
                     }
                 }else if(field_child.dataset.color == "black") {
-                    if(figure.dataset.y != "2") {
-                        if((parseInt(figure.dataset.y - vectorY)) == -1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
-                            return control = 1
-                        }
+                    console.log("wrog foot")
+                    if((parseInt(figure.dataset.y - vectorY)) == -1 && ((parseInt(figure.dataset.x - vectorX) == 1) || (parseInt(figure.dataset.x - vectorX) == -1) )) {
+                        return true
                     }
                 }
             }
-            if(control = 1){
-                var check_x = checked_figure.dataset.x
-                var check_y = checked_figure.dataset.y
-                if(figure.dataset.y < vectorY) {
-                    bishop_move_y = "++"
-                    console.log("gora")
-                }
-                else if(figure.dataset.y > vectorY) {
-                    bishop_move_y = "--"
-                    console.log("dol")
-                }
-                else {
-                    bishop_move_y = ""
-                }
-                if(figure.dataset.x < vectorX) {
-                    bishop_move_x = "++"
-                    console.log("prawo")
-                }
-                else if(figure.dataset.x > vectorX) {
-                    bishop_move_x = "--"
-                    console.log("lewo")
-                }
-                else {
-                    bishop_move_x = ""
+            console.log("false foot")
+            return false
+        }
+        if((figure.className == "tower figure") || (figure.className == "queen figure")) {
+            var check_x = figure.dataset.x
+            var check_y = figure.dataset.y
+            if(figure.dataset.y < vectorY) {
+                bishop_move_y = "++"
+                console.log("gora")
+            }
+            else if(figure.dataset.y > vectorY) {
+                bishop_move_y = "--"
+                console.log("dol")
+            }
+            else {
+                bishop_move_y = ""
+            }
+            if(figure.dataset.x < vectorX) {
+                bishop_move_x = "++"
+                console.log("prawo")
+            }
+            else if(figure.dataset.x > vectorX) {
+                bishop_move_x = "--"
+                console.log("lewo")
+            }
+            else {
+                bishop_move_x = ""
+            }
+            if((bishop_move_x != "") && (bishop_move_y != "")) {
+                console.log("queen")
+            }else {
+                if((vectorX != figure.dataset.x) && (vectorY != figure.dataset.y)) {
+                    return false
                 }
                 do{
                     if(bishop_move_x == "++") {
@@ -466,73 +497,23 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                         return false
                     }
                 }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
-            }else {
-                return false
-            }    
-        }
-        if(figure.className == "tower figure") {
-            if((vectorX != figure.dataset.x) && (vectorY != figure.dataset.y)) {
-                return false
-            }
-            var check_x = checked_figure.dataset.x
-            var check_y = checked_figure.dataset.y
-            if(figure.dataset.y < vectorY) {
-                bishop_move_y = "++"
-                console.log("gora")
-            }
-            else if(figure.dataset.y > vectorY) {
-                bishop_move_y = "--"
-                console.log("dol")
-            }
-            else {
-                bishop_move_y = ""
-            }
-            if(figure.dataset.x < vectorX) {
-                bishop_move_x = "++"
-                console.log("prawo")
-            }
-            else if(figure.dataset.x > vectorX) {
-                bishop_move_x = "--"
-                console.log("lewo")
-            }
-            else {
-                bishop_move_x = ""
-            }
-            do{
-                if(bishop_move_x == "++") {
-                    check_x++
-                    console.log({check_x})
-                }else if(bishop_move_x == "--"){
-                    check_x--
-                    console.log({check_x})
-                }
-                if(bishop_move_y == "++") {
-                    check_y++
-                    console.log({check_y})
-                }else if(bishop_move_y == "--"){
-                    check_y--
-                    console.log({check_y})
-                }
-                var id = '#' + letters[check_x - 1] +""+check_y
-                console.log(id)
-                var check_field = document.querySelector(id).firstChild
-                if(
-                    (check_field != null) && 
-                    (check_x == parseInt(vectorX)) && 
-                    (check_y == parseInt(vectorY))
-                ){
+                if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
                     return true
-                }else if((check_field != null)){
-                    return false
                 }
-            }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
-            if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
-                return true
+                if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
+                    return true
+                }
+                // if((field_child.className == "king figure")) {
+                //     if(figure.dataset.color == field_child.dataset.color) {
+                //         var king_color = field_child.dataset.color
+                //         if(){
+
+                //         }
+                //     }
+
+                // }
+                return false
             }
-            if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
-                return true
-            }
-            return false
         }
         if(figure.className == "horse figure") {
             if((((parseInt(figure.dataset.y) - parseInt(vectorY)) == -2) || ((parseInt(figure.dataset.y) - parseInt(vectorY)) == 2)) && (((parseInt(figure.dataset.x) - parseInt(vectorX)) == 1) || ((parseInt(figure.dataset.x) - parseInt(vectorX)) == -1))) {
@@ -543,7 +524,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
             }
             return false
         }
-        if(figure.className == "bishop figure") {
+        if((figure.className == "bishop figure") || (figure.className == "queen figure")) {
             var check_x = checked_figure.dataset.x
             var check_y = checked_figure.dataset.y
             if(figure.dataset.y < vectorY) {
@@ -608,76 +589,86 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
         }
         if(figure.className == "king figure") {
             if((parseInt(figure.dataset.y - vectorY)) == 1 || (parseInt(figure.dataset.y - vectorY) == -1)) {
+                if(figure.dataset.color == "white") {
+                    white_king_move = 1
+                }else {
+                    black_king_move = 1
+                }
                 return true
             }else if((parseInt(figure.dataset.x - vectorX)) == 1 || ((parseInt(figure.dataset.x - vectorX)) == -1)) {
+                if(figure.dataset.color == "white") {
+                    white_king_move = 1
+                }else {
+                    black_king_move = 1
+                }
                 return true
             }
             return false
         }
-        if(figure.className == "queen figure") {
-            var check_x = checked_figure.dataset.x
-            var check_y = checked_figure.dataset.y
-            if(figure.dataset.y < vectorY) {
-                bishop_move_y = "++"
-                console.log("gora")
-            }
-            else if(figure.dataset.y > vectorY) {
-                bishop_move_y = "--"
-                console.log("dol")
-            }
-            else {
-                bishop_move_y = ""
-            }
-            if(figure.dataset.x < vectorX) {
-                bishop_move_x = "++"
-                console.log("prawo")
-            }
-            else if(figure.dataset.x > vectorX) {
-                bishop_move_x = "--"
-                console.log("lewo")
-            }
-            else {
-                bishop_move_x = ""
-            }
-            do{
-                if(bishop_move_x == "++") {
-                    check_x++
-                    console.log({check_x})
-                }else if(bishop_move_x == "--"){
-                    check_x--
-                    console.log({check_x})
-                }
-                if(bishop_move_y == "++") {
-                    check_y++
-                    console.log({check_y})
-                }else if(bishop_move_y == "--"){
-                    check_y--
-                    console.log({check_y})
-                }
-                var id = '#' + letters[check_x - 1] +""+check_y
-                console.log(id)
-                var check_field = document.querySelector(id).firstChild
-                if(
-                    (check_field != null) && 
-                    (check_x == parseInt(vectorX)) && 
-                    (check_y == parseInt(vectorY))
-                ){
-                    return true
-                }else if((check_field != null)){
-                    return false
-                }
-                if((bishop_move_x == "") || (bishop_move_y == "")){
-                    if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
-                        return true
-                    }
-                    if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
-                        return true
-                    }
-                }    
-            }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
-            return false
+        // if(figure.className == "queen figure") {
+        //     var check_x = checked_figure.dataset.x
+        //     var check_y = checked_figure.dataset.y
+        //     if(figure.dataset.y < vectorY) {
+        //         bishop_move_y = "++"
+        //         console.log("gora")
+        //     }
+        //     else if(figure.dataset.y > vectorY) {
+        //         bishop_move_y = "--"
+        //         console.log("dol")
+        //     }
+        //     else {
+        //         bishop_move_y = ""
+        //     }
+        //     if(figure.dataset.x < vectorX) {
+        //         bishop_move_x = "++"
+        //         console.log("prawo")
+        //     }
+        //     else if(figure.dataset.x > vectorX) {
+        //         bishop_move_x = "--"
+        //         console.log("lewo")
+        //     }
+        //     else {
+        //         bishop_move_x = ""
+        //     }
+        //     do{
+        //         if(bishop_move_x == "++") {
+        //             check_x++
+        //             console.log({check_x})
+        //         }else if(bishop_move_x == "--"){
+        //             check_x--
+        //             console.log({check_x})
+        //         }
+        //         if(bishop_move_y == "++") {
+        //             check_y++
+        //             console.log({check_y})
+        //         }else if(bishop_move_y == "--"){
+        //             check_y--
+        //             console.log({check_y})
+        //         }
+        //         var id = '#' + letters[check_x - 1] +""+check_y
+        //         console.log(id)
+        //         var check_field = document.querySelector(id).firstChild
+        //         if(
+        //             (check_field != null) && 
+        //             (check_x == parseInt(vectorX)) && 
+        //             (check_y == parseInt(vectorY))
+        //         ){
+        //             return true
+        //         }else if((check_field != null)){
+        //             return false
+        //         }
+        //         if((bishop_move_x == "") || (bishop_move_y == "")){
+        //             if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
+        //                 return true
+        //             }
+        //             if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
+        //                 return true
+        //             }
+        //         }    
+        //     }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
+        //     return false
 
-        }
+        // }
     }else{
         console.log("now play"+now_play)
         return false
