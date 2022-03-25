@@ -283,6 +283,7 @@ function chess_gameSet() {
     })
     chess_move()
 }
+
 var now_play = 'white'
 var checked_figure
 var checked = 0
@@ -677,70 +678,6 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
             }
             return false
         }
-        // if(figure.className == "queen figure") {
-        //     var check_x = checked_figure.dataset.x
-        //     var check_y = checked_figure.dataset.y
-        //     if(figure.dataset.y < vectorY) {
-        //         bishop_move_y = "++"
-        //         console.log("gora")
-        //     }
-        //     else if(figure.dataset.y > vectorY) {
-        //         bishop_move_y = "--"
-        //         console.log("dol")
-        //     }
-        //     else {
-        //         bishop_move_y = ""
-        //     }
-        //     if(figure.dataset.x < vectorX) {
-        //         bishop_move_x = "++"
-        //         console.log("prawo")
-        //     }
-        //     else if(figure.dataset.x > vectorX) {
-        //         bishop_move_x = "--"
-        //         console.log("lewo")
-        //     }
-        //     else {
-        //         bishop_move_x = ""
-        //     }
-        //     do{
-        //         if(bishop_move_x == "++") {
-        //             check_x++
-        //             console.log({check_x})
-        //         }else if(bishop_move_x == "--"){
-        //             check_x--
-        //             console.log({check_x})
-        //         }
-        //         if(bishop_move_y == "++") {
-        //             check_y++
-        //             console.log({check_y})
-        //         }else if(bishop_move_y == "--"){
-        //             check_y--
-        //             console.log({check_y})
-        //         }
-        //         var id = '#' + letters[check_x - 1] +""+check_y
-        //         console.log(id)
-        //         var check_field = document.querySelector(id).firstChild
-        //         if(
-        //             (check_field != null) && 
-        //             (check_x == parseInt(vectorX)) && 
-        //             (check_y == parseInt(vectorY))
-        //         ){
-        //             return true
-        //         }else if((check_field != null)){
-        //             return false
-        //         }
-        //         if((bishop_move_x == "") || (bishop_move_y == "")){
-        //             if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
-        //                 return true
-        //             }
-        //             if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
-        //                 return true
-        //             }
-        //         }    
-        //     }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
-        //     return false
-
-        // }
     }else{
         console.log("now play"+now_play)
         return false
