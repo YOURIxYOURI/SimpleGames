@@ -682,6 +682,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                     black_king_move = 1
                 }
                 return true
+            }
             return false
         }
     }else{

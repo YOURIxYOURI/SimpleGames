@@ -230,3 +230,9 @@ thead {
 #choosed {
     opacity: 0.5;
 }
+
+.moveable {
+    background-color: green;
+    opacity: 0.5;
+    z-index: 3;
+}
