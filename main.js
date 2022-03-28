@@ -675,7 +675,13 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                     black_king_move = 1
                 }
                 return true
-            }
+            }else if(((parseInt(figure.dataset.x - vectorX)) == 1 || ((parseInt(figure.dataset.x - vectorX)) == -1)) && ((parseInt(figure.dataset.y - vectorY)) == 1 || (parseInt(figure.dataset.y - vectorY) == -1))) {
+                if(figure.dataset.color == "white") {
+                    white_king_move = 1
+                }else {
+                    black_king_move = 1
+                }
+                return true
             return false
         }
     }else{
