@@ -473,9 +473,12 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                 console.log("queen")
             }else {
                 if((vectorX != figure.dataset.x) && (vectorY != figure.dataset.y)) {
-                    control = 0
+                    return false
                 }
-                do{
+                console.log("przed")
+               do{
+                    let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+                    console.log("w petli")
                     if(bishop_move_x == "++") {
                         check_x++
                         console.log({check_x})
@@ -490,7 +493,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                         check_y--
                         console.log({check_y})
                     }
-                    var id = '#' + letters[check_x - 1] +""+check_y
+                    var id = '#' + letters[check_x - 1]+check_y
                     console.log(id)
                     var check_field = document.querySelector(id).firstChild
                     if(
@@ -498,93 +501,17 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                         (check_x == parseInt(vectorX)) && 
                         (check_y == parseInt(vectorY))
                     ){
-                        control = 1
+                        return true
                     }else if((check_field != null)){
-                        control = 0
+                        console.log("wykryto blokade")
+                        return false
                     }
-                }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
-                if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
-                    control = 1
-                }
+                } while((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY)))
                 if((vectorX != figure.dataset.x) && (vectorY == figure.dataset.y)) {
-                    control = 1
+                    return true
                 }
-                console.log("control"+control)
-                if(control == 1) {
-                    var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-slide-1-sound-effect-99743653.mp3');
-                    var child_for_king = field_child
-                    console.log(child_for_king)
-                    if(child_for_king == null) {
-                        return true
-                    }else if(child_for_king.className == "king figure"){
-                        console.log('start')
-                        const letters_for_x = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-                        if(figure.dataset.color == child_for_king.dataset.color) {
-                            console.log(child_for_king.dataset.color)
-                            if(child_for_king.dataset.color == "white"){
-                                var king_x = child_for_king.dataset.x
-                                console.log(white_king_move)
-                                if(white_king_move == 0){
-                                    if(bishop_move_x == "--") {
-                                        var id_for_tower = '#' + letters_for_x[king_x - 1] +""+check_y
-                                        var id_for_king = '#' + letters_for_x[king_x] +""+check_y
-                                    }else if(bishop_move_x == "++") {
-                                        var id_for_tower = '#' + letters_for_x[king_x - 1] +""+check_y
-                                        var id_for_king = '#' + letters_for_x[king_x - 2] +""+check_y
-                                    } 
-                                    console.log(id_for_king, id_for_tower)
-                                    document.querySelector(id_for_tower).appendChild(figure)
-                                    document.querySelector(id_for_king).appendChild(child_for_king)
-                                    audio.play();
-                                    checked = 0
-                                    white_king_move == 1
-                                    if(now_play == "white") {
-                                        now_play = "black"
-                                    }
-                                    else{
-                                        now_play = "white"
-                                    }
-                                    return false
-                                }else{
-                                    console.log("king make move")
-                                    return false
-                                }
-                            }else{
-                                if(black_king_move == 0){
-                                    var king_x = child_for_king.dataset.x
-                                    if(bishop_move_x == "--") {
-                                        var id_for_tower = '#' + letters_for_x[king_x - 1] +""+check_y
-                                        var id_for_king = '#' + letters_for_x[king_x] +""+check_y
-                                    }else if(bishop_move_x == "++") {
-                                        var id_for_tower = '#' + letters_for_x[king_x - 1] +""+check_y
-                                        var id_for_king = '#' + letters_for_x[king_x - 2] +""+check_y
-                                    } 
-                                    console.log(id_for_king, id_for_tower)
-                                    document.querySelector(id_for_tower).appendChild(figure)
-                                    document.querySelector(id_for_king).appendChild(child_for_king)
-                                    audio.play();
-                                    checked = 0
-                                    black_king_move == 1
-                                    if(now_play == "white") {
-                                        now_play = "black"
-                                    }
-                                    else{
-                                        now_play = "white"
-                                    }
-                                    return false
-                                }else{
-                                    console.log("king make move")
-                                    return false
-                                }
-                            }
-                        }else{
-                            return true
-                        }
-                    }else{
-                        return true
-                    }
-                }else{
-                    return false
+                if((vectorX == figure.dataset.x) && (vectorY != figure.dataset.y)) {
+                    return true
                 }
             }
         }
@@ -622,7 +549,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
             else {
                 bishop_move_x = ""
             }
-            do{
+            while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY)))){
                 if(bishop_move_x == "++") {
                     check_x++
                     console.log({check_x})
@@ -653,7 +580,7 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
                 }else if((check_field != null)){
                     return false
                 }
-            }while(((check_x != parseInt(vectorX)) && (check_y != parseInt(vectorY))))
+            }
             console.log(check_y, check_x, vectorY, vectorX)
             if((check_x == vectorX) && (check_y == vectorY)) {
                 return true
