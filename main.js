@@ -318,8 +318,20 @@ function chess_move() {
                         if(check_move(checked_figure, v2.dataset.x, v2.dataset.y, child, now_play)) {
                             if(checked == 1) {
                                 if(child != null) {
-                                    console.log('figura')
-                                    if (child.dataset.color != checked_figure.dataset.color) {
+                                    console.log('figura') 
+                                    if((child.dataset.color == checked_figure.dataset.color) && (checked_figure.className == "tower figure") && (child  .className == "king figure")){
+                                        console.log("castle")
+                                        if(castle(checked_figure, child, bishop_move_x, bishop_move_y)) {
+                                            var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-slide-1-sound-effect-99743653.mp3');
+                                            audio.play();
+                                            if(now_play == "white") {
+                                                now_play = "black"
+                                            }
+                                            else{
+                                                now_play = "white"
+                                            }
+                                        } 
+                                    }else if (child.dataset.color != checked_figure.dataset.color) {
                                         var audio = new Audio('http://freesoundeffect.net/sites/default/files/game-piece-fall-1-sound-effect-85931397.mp3');
                                         audio.play();
                                         console.log('bicie')
@@ -618,3 +630,57 @@ function check_move(figure, vectorX, vectorY, field_child, who) {
     }    
 }
 
+function castle(figure, field_child, move_x, move_y) {
+    var id_for_tower
+    var id_for_king
+    if(move_y != "") {
+        checked = 0 
+        figure.setAttribute('id', '')
+        checked_figure = ""
+        return false
+    }
+    if(field_child.dataset.color == "black") {
+        if(white_king_move != 0) {
+            checked = 0 
+            figure.setAttribute('id', '')
+            checked_figure = ""
+            return false
+        }else{
+            if(move_x == "++") {
+                id_for_tower = 'd8'
+                id_for_king = 'c8'
+            }else if(move_x == "--"){
+                id_for_tower = 'f8'
+                id_for_king = 'g8'
+            }
+            console.log(move_x, move_y)
+            document.getElementById(id_for_king).appendChild(field_child)
+            document.getElementById(id_for_tower).appendChild(figure)
+            checked = 0 
+            figure.setAttribute('id', '')
+            checked_figure = ""
+            return true
+        }
+    }else if(field_child.dataset.color == "white") {
+        if(black_king_move != 0) {
+            checked = 0 
+            figure.setAttribute('id', '')
+            checked_figure = ""
+            return false
+        }else{
+            if(move_x == "++") {
+                id_for_tower = 'd1'
+                id_for_king = 'c1'
+            }else if(move_x == "--"){
+                id_for_tower = 'f1'
+                id_for_king = 'g1'
+            }
+            document.getElementById(id_for_king).appendChild(field_child)
+            document.getElementById(id_for_tower).appendChild(figure)
+            checked = 0 
+            figure.setAttribute('id', '')
+            checked_figure = ""
+            return true
+        }
+    }
+}
